@@ -10,22 +10,35 @@
   gtag('config', 'AW-11175946920');
 </script>
 
-<!-- Event snippet for ESclicklinkOffer conversion page
-In your html page, add the snippet and call gtag_report_conversion when someone clicks on the chosen link or button. -->
 <script>
-function gtag_report_conversion(url) {
-  var callback = function () {
-    if (typeof(url) != 'undefined') {
-      window.location = url;
+    function gtag_report_conversion(url) {
+        var callback = function() {
+            if (typeof(url) != 'undefined') {
+                window.location = url;
+            }
+        };
+        gtag('event', 'conversion', {
+            'send_to': 'AW-11175946920/8s54CIGk7bwYEKjVjdEp',
+            'event_callback': callback
+        });
+        return false;
     }
-  };
-  gtag('event', 'conversion', {
-      'send_to': 'AW-11175946920/8s54CIGk7bwYEKjVjdEp',
-      'event_callback': callback
-  });
-  return false;
-}
+
+
+    var links = document.getElementsByTagName('a');
+
+
+    for (var i = 0; i < links.length; i++) {
+        links[i].addEventListener('click', function(event) {
+            event.preventDefault(); 
+
+            var url = this.href; 
+
+            gtag_report_conversion(url);
+        });
+    }
 </script>
+
 
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
